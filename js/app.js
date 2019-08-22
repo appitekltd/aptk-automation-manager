@@ -20,7 +20,7 @@ var $App = new Vue({
     all: false,
     search: '',
     url: '',
-    filter: '',
+    filter: 'NONE',
     types: ['ApexClass', 'ApexTrigger', 'Flow', 'WorkflowRule', 'ValidationRule'],
     authenticated: false,
     automation: []
@@ -48,12 +48,12 @@ var $App = new Vue({
           if (a.Object != null) name += a.Object.toLowerCase();
           if (a.Package != null) name += a.Package.toLowerCase();
           if (a.LastModifiedBy != null) name += a.LastModifiedBy.toLowerCase();
-          if ($App.filter != '') {
+          if ($App.filter != 'NONE') {
             return a.Type == $App.filter && name.indexOf(search) != -1;
           } else {
             return name.indexOf(search) != -1;
           }
-        } else if ($App.filter != '') {
+        } else if ($App.filter != 'NONE') {
           return a.Type == $App.filter;
         } else {
           return a;
@@ -306,6 +306,18 @@ var $App = new Vue({
         $App.email = $Force[$App.options.environment].client().email;
         $App.loadData();
       });
+    },
+    /*
+     *  @method $App.loginSession()
+     *  @desc Logs a user in via their Session Id. Used via the VF page to skip
+     *    authenticating.
+     * 
+     *  @return {Null}
+     */
+    loginSession: function(session) {
+      $Force[$App.options.environment].session(session);
+      $App.authenticated = true;
+      $App.loadData();
     },
     /*
      *  @method $App.logoutUser()

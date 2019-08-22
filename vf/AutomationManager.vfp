@@ -1,24 +1,17 @@
-<html>
+<apex:page sidebar="false" showHeader="false" standardStylesheets="false">
 
   <head>
-    <link rel="icon" type="image/png" href="https://www.appitek.com/img/logos/automation-manager-logo.png"/>  
+    <link rel="icon" type="image/png" href="https://www.appitek.com/img/logos/automation-search-logo.png"/>  
     <link rel="stylesheet" type="text/css" href="https://appitek.com/ui/css/style.css"/>
     <script type="text/javascript" src="https://appitek.com/ui/fa.js"></script>
-    <script type="text/javascript" src="js/libs/vue.js"></script>
-    <script type="text/javascript" src="js/libs/forcetek.js"></script>
-    <script type="text/javascript" src="js/modules/force.js"></script>
-    <script type="text/javascript" src="js/modules/parser.js"></script>
-    <script type="text/javascript" src="js/modules/metadata.js"></script>
-    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    <script type="text/javascript" src="{!URLFOR($Resource.AutomationManagerResource, 'js/libs/vue-mod.js')}"></script>
+    <script type="text/javascript" src="{!URLFOR($Resource.AutomationManagerResource, 'js/libs/forcetek.js')}"></script>
+    <script type="text/javascript" src="{!URLFOR($Resource.AutomationManagerResource, 'js/modules/force.js')}"></script>
+    <script type="text/javascript" src="{!URLFOR($Resource.AutomationManagerResource, 'js/modules/parser.js')}"></script>
+    <script type="text/javascript" src="{!URLFOR($Resource.AutomationManagerResource, 'js/modules/metadata.js')}"></script> 
+    <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.AutomationManagerResource, 'css/style.css')}"/>
+    <meta charset="UTF-8"/>
     <title>Appitek | Automation Manager</title>
-    <meta property="og:image" content="https://www.appitek.com/img/logos/automation-manager-ogg.png"/>
-    <meta property="og:title" content="Appitek | Automation Manager"/>
-    <meta property="og:description" content="Manage and export all of your Salesforce 
-      automations for keywords, including Validation Rules, Workflows, Process 
-      Builders, Triggers, and Apex Classes."/>
-    <meta property="og:url" content="https://www.appitek.com/pages/tools/automation-manager.html"/>
-    <meta property="og:site_name" content="Appitek | Automation Manager"/>
-    <meta property="og:type" content="website"/>
   </head>
 
   <body class="aptk">
@@ -29,7 +22,11 @@
       
       <nav class="aptk-nav">
         <ul class="aptk-float--l">
-          <li v-on:click="logoutUser()">Logout</li>
+          <li>
+            <a style="color: rgba(224, 229, 235, 0.9); text-decoration: none" href="/">
+              Back to Salesforce
+            </a>
+          </li>
           <li>
             <a style="color: rgba(224, 229, 235, 0.9); text-decoration: none" href="https://www.appitek.com/pages/feedback.html" target="_blank">
               Give Feedback
@@ -42,7 +39,7 @@
         <div class="aptk-header--info">
           <img height="50px" src="https://www.appitek.com/img/logos/automation-manager-logo.png"/>
           <h1>Automation Manager</h1>
-          <h2>{{ email }}</h2>
+          <h2>{!$User.Email}</h2>
         </div>
         <div class="aptk-header--actions">
           <div class="aptk-group">
@@ -52,12 +49,12 @@
             </div>
             <div style="margin-top: 0px !important;" class="aptk-input aptk-input--nolabel">
               <select v-model="filter">
-                <option value="">-- All --</option>
+                <option value="NONE">-- All --</option>
                 <option v-for="type in sortedTypes">{{ type }}</option>
               </select>
               <span><i class="fas fa-caret-down"></i></span>
             </div>
-            <button v-bind:disabled="totalSelected == 0" v-on:click="exportSelected()" class="aptk-button aptk-button--blue">
+            <button v-bind-disabled="totalSelected == 0" v-on-click="exportSelected()" class="aptk-button aptk-button--blue">
               {{ totalSelected == automation.length ? 'Export All' : totalSelected > 0 ? 'Export Selected': 'Nothing Selected'}}
             </button>
           </div>
@@ -98,7 +95,7 @@
                   </div>
                 </td>
                 <td class="aptk-am--name">
-                    <a v-bind:href="url + '/' + a.Id" target="_blank">
+                    <a v-bind-href="url + '/' + a.Id" target="_blank">
                       <div class="aptk-am--name">{{ a.Name }}</div>
                     </a>
                 </td>
@@ -110,7 +107,7 @@
                 <td>{{ a.LastModifiedDate }}</td>
                 <td>{{ a.LastModifiedBy }}</td>
                 <td>
-                  <button v-on:click="exportAutomation(a)" class="aptk-button aptk-button--blue">
+                  <button v-on-click="exportAutomation(a)" class="aptk-button aptk-button--blue">
                     Export
                   </button>
                 </td>
@@ -132,7 +129,7 @@
         </table>
       </div>
 
-      <div class="aptk-popup aptk-popup--splash" v-bind:class="{'aptk-hide': authenticated }">
+      <div class="aptk-popup aptk-popup--splash" v-bind-class="{'aptk-hide': authenticated }">
         <table>
           <tr>
             <td>
@@ -145,8 +142,7 @@
                   <img class="aptk-popup--splash_icon" src="https://www.appitek.com/img/logos/automation-manager-logo.png"/>
                   <h1>Automation Manager</h1>
                   <p>
-                    Please select the items you want to search across, and 
-                    log into your Salesforce Environment to begin.
+                    Please select the items you want to be able to export.
                   </p>
                   <br/>
                   <div class="aptk-grid">
@@ -195,15 +191,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="aptk-input">
-                    <select v-model="options.environment">
-                      <option>Sandbox</option>
-                      <option>Production</option>
-                    </select>
-                    <label>Environment</label>
-                    <span><i class="fas fa-caret-down"></i></span>
-                  </div>
-                  <div v-on:click="loginUser()" class="aptk-button aptk-button--blue aptk-x1">Login</div>
+                  <div style="margin-top: 10px" v-on-click="loginSession('{!$Api.Session_ID}')" class="aptk-button aptk-button--blue aptk-x1">Login</div>
                 </div>
               </div>
             </td>
@@ -215,20 +203,13 @@
             <img src="https://www.appitek.com/img/footer-github-dark.png"/>
           </div>
         </a>
-        <a href="https://login.salesforce.com/packaging/installPackage.apexp?p0=04t4J000000rMjd" target="_blank">
-          <div style="margin-bottom: 40px" class="aptk-am--footer">
-            <p>Install in Salesforce</p>
-            <img src="https://www.appitek.com/img/footer-salesforce.png"/>
-          </div>
-        </a>
       </div>
 
     </div>
 
-
-    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="{!URLFOR($Resource.AutomationManagerResource, 'js/app.js')}"></script>
     
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-141145289-1"></script>
+    <script src="https://www.googletagmanager.com/gtag/js?id=UA-141145289-1"></script>
       <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
@@ -238,4 +219,4 @@
 
   </body>
 
-</html>
+</apex:page>
