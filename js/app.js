@@ -315,6 +315,7 @@ var $App = new Vue({
      *  @return {Null}
      */
     loginSession: function(session) {
+      $App.options.environment = 'Salesforce';
       $Force[$App.options.environment].session(session);
       $App.authenticated = true;
       $App.loadData();

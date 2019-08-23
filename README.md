@@ -9,7 +9,7 @@ It is currently hosted on our [website](https://www.appitek.com/tools/automation
 None of your data leaves the platform or is stored in local data / cookies.
 
 ## Using within Salesforce ##
-If you want to use this tool directly in Salesforce rather than from our website, you can install [this unmanaged package](https://login.salesforce.com/packaging/installPackage.apexp?p0=04t4J000000rMjd).
+If you want to use this tool directly in Salesforce rather than from our website, you can install it [from the AppExchange](https://appexchange.salesforce.com/appxListingDetail?listingId=a0N3A00000G0sC9UAJ).
 
 This package contains the `AutomationManager.vfp` Visualforce Page, the `AutomationManagerResource` Static Resource, and a custom VF Tab for the page. 
 
