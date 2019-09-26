@@ -1,9 +1,9 @@
 <apex:page sidebar="false" showHeader="false" standardStylesheets="false">
 
   <head>
-    <link rel="icon" type="image/png" href="https://www.appitek.com/img/logos/automation-search-logo.png"/>  
-    <link rel="stylesheet" type="text/css" href="https://appitek.com/ui/css/style.css"/>
-    <script type="text/javascript" src="https://appitek.com/ui/fa.js"></script>
+    <link rel="icon" type="image/png" href="{!URLFOR($Resource.AutomationManagerResource, 'img/automation-manager-logo.png')}"/>  
+    <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.AutomationManagerResource, 'css/aui.css')}"/>
+    <script type="text/javascript" src="{!URLFOR($Resource.AutomationManagerResource, 'js/libs/fa.js')}"></script>
     <script type="text/javascript" src="{!URLFOR($Resource.AutomationManagerResource, 'js/libs/vue-mod.js')}"></script>
     <script type="text/javascript" src="{!URLFOR($Resource.AutomationManagerResource, 'js/libs/forcetek.js')}"></script>
     <script type="text/javascript" src="{!URLFOR($Resource.AutomationManagerResource, 'js/modules/parser.js')}"></script>
@@ -31,7 +31,7 @@
 
       <header class="aptk-header">
         <div class="aptk-header--info">
-          <img height="50px" src="https://www.appitek.com/img/logos/automation-manager-logo.png"/>
+          <img height="50px" src="{!URLFOR($Resource.AutomationManagerResource, 'img/automation-manager-logo.png')}"/>
           <h1>Automation Manager</h1>
           <h2>{!$User.Email}</h2>
         </div>
@@ -130,10 +130,10 @@
               <div class="aptk-popup--overlay"></div>
               <div class="aptk-popup--wrapper" style="max-width: 360px">
                 <div class="aptk-popup--wrapper_header">
-                  <img class="aptk-popup--splash_logo" src="https://www.appitek.com/img/logo.png"/>
+                  <img class="aptk-popup--splash_logo" src="{!URLFOR($Resource.AutomationManagerResource, 'img/logo.png')}"/>
                 </div>
                 <div class="aptk-popup--wrapper_content">
-                  <img class="aptk-popup--splash_icon" src="https://www.appitek.com/img/logos/automation-manager-logo.png"/>
+                  <img class="aptk-popup--splash_icon" src="{!URLFOR($Resource.AutomationManagerResource, 'img/automation-manager-logo.png')}"/>
                   <h1>Automation Manager</h1>
                   <p>
                     Please select the items you want to be able to export.
@@ -194,7 +194,7 @@
         <a href="https://github.com/appitekltd/aptk-automation-manager" target="_blank">
           <div class="aptk-am--footer">
             <p>Fork on GitHub</p>
-            <img src="https://www.appitek.com/img/footer-github-dark.png"/>
+            <img src="{!URLFOR($Resource.AutomationManagerResource, 'img/footer-github-dark.png')}"/>
           </div>
         </a>
       </div>
@@ -214,14 +214,6 @@
     </script>
 
     <script type="text/javascript" src="{!URLFOR($Resource.AutomationManagerResource, 'js/app.js')}"></script>
-    
-    <script src="https://www.googletagmanager.com/gtag/js?id=UA-141145289-1"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'UA-141145289-1');
-      </script>
 
   </body>
 
