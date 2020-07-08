@@ -10,6 +10,12 @@
     <script type="text/javascript" src="{!URLFOR($Resource.AutomationManagerResource, 'js/modules/metadata.js')}"></script> 
     <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.AutomationManagerResource, 'css/style.css')}"/>
     <meta charset="UTF-8"/>
+    <script type="text/javascript">
+      var theme = '{!$User.UITheme}';
+      if (theme != 'Theme2' && theme != 'Theme3') {
+        window.location.top.href = '/apex/aptk_manager__AutomationManager';
+      }
+    </script>
     <title>Appitek | Automation Manager</title>
   </head>
 

@@ -152,14 +152,38 @@ var $App = new Vue({
         });
         file.push(row.join(','))
       });
-      var link = document.getElementById('link');
-      var blob = new Blob([file.join('\n')], {type: "text/csv;charset=utf-8;"});
-      var url = window.URL.createObjectURL(blob);
+
+      var base64 = btoa(file.join('\n'));
+      var mime = 'text/csv;charset=utf-8;';
       var name = 'Automation Export (' + new Date().toISOString() + ').csv';
-      link.setAttribute('href', url);
+
+      var link = document.getElementById('link');
       link.setAttribute('download', name);
+      link.setAttribute('href', 'data:' + mime + ';base64,' + base64);
+      console.log(link);
       link.click();
       $App.loading = '';
+
+
+      
+      //var doc = res.substring(6, res.length - 6);
+      //var link = document.getElementById('download');
+      //var type = o.documentType == 'PDF' ? 'pdf' : o.documentType == 'Word' ? '.doc' : '.html';
+      //var mime = o.documentType == 'PDF' ? 'application/pdf' : o.documentType == 'Word' ? 'application/msword' : 'text/html';
+      //console.log(type, mime);
+      //console.log(doc);
+      //link.style.display = 'none';
+      //document.body.appendChild(link);
+      //console.log(link);
+      //link.click();
+      //link.remove();
+      //$App.finishAction('Success');
+
+      //var blob = new Blob([file.join('\n')], {type: "text/csv;charset=utf-8;"});
+      //var url = window.URL.createObjectURL(blob);
+      //link.setAttribute('href', url);
+      //link.setAttribute('download', name);
+      //link.click();
     },
     /*
      *  @method $App.escapeData()

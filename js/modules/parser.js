@@ -194,6 +194,7 @@ var $Parser = (function() {
      *  @return {Null}
      */
     processAction: function(action, wait) {
+      try {
       if (_processed.indexOf(action.name) != -1) return null;
       if (action._type == 'decision') return _that.processDecision(action, wait);
       _processed.push(action.name);
@@ -281,6 +282,9 @@ var $Parser = (function() {
       if (action.connector) next = _that.getReference(action.connector.targetReference);
       if (action.defaultConnector) next = _that.getReference(action.defaultConnector.targetReference);
       if (next && _processed.indexOf(next.name) == -1) _that.processAction(next);
+    } catch(e) {
+      value = 'Could not process action: ' + JSON.stringify(action);
+    }
     },
     /*
      *  @method $Parser.processWait()
